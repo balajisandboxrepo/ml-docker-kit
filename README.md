@@ -14,13 +14,17 @@
 
 ```mermaid
 flowchart TD
-    subgraph Container[Docker Container]
+    subgraph Container["Docker Container"]
         direction LR
-        FastAPI[FastAPI App (uvicorn)] --> Model[model.pkl]
-        FastAPI --> Scaler[scaler.pkl]
-        FastAPI --> API[HTTP Endpoints]
+        FastAPI["FastAPI App (uvicorn)"]
+        Model["model.pkl"]
+        Scaler["scaler.pkl"]
+        API["HTTP Endpoints"]
+        FastAPI --> Model
+        FastAPI --> Scaler
+        FastAPI --> API
     end
-    Client[Client] -->|HTTP Request| API
+    Client["Client"] -->|HTTP Request| API
     API -->|Prediction| Model
     Model -->|Scaled Input| Scaler
 ```
